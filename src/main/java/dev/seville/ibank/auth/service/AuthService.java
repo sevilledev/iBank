@@ -41,8 +41,9 @@ public class AuthService {
 
         userRepo.save(user);
 
-        String token = jwtService.generateToken(user);
-        return new AuthResponse(token);
+        String accessToken = jwtService.generateAccessToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
+        return new AuthResponse(accessToken, refreshToken);
     }
 
     public AuthResponse login(LoginDTO request) {
@@ -56,8 +57,9 @@ public class AuthService {
         User user = userRepo.findByEmail(request.email())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        String token = jwtService.generateToken(user);
+        String accessToken = jwtService.generateAccessToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
 
-        return new AuthResponse(token);
+        return new AuthResponse(accessToken, refreshToken);
     }
 }
