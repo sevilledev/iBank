@@ -16,6 +16,6 @@ public class UserService {
 
     public List<UserResponseDTO> getAllUsers() {
         return userRepo.findAll().stream().
-                map(u -> new UserResponseDTO(u.getId(), u.getUsername(), u.getEmail(), u.getRole())).toList();
+                map(u -> new UserResponseDTO(u.getId(), u.getFirstname(), u.getEmail(), u.getRole())).toList();
     }
 }

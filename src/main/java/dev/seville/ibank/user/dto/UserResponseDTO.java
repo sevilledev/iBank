@@ -4,7 +4,7 @@ import dev.seville.ibank.user.entity.Role;
 
 public record UserResponseDTO (
         Long id,
-        String username,
+        String firstname,
         String email,
         Role role
 ) {
