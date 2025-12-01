@@ -1,5 +1,6 @@
 package dev.seville.ibank.user.entity;
 
+import dev.seville.ibank.auth.entity.RefreshToken;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,13 +23,17 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "user")
+    private List<RefreshToken> tokens;
+
     public User() { }
 
-    public User(String firstname, String email, String password, Role role) {
+    public User(String firstname, String email, String password, Role role, List<RefreshToken> tokens) {
         this.firstname = firstname;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.tokens = tokens;
     }
 
     public Long getId() {
@@ -70,6 +75,14 @@ public class User implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<RefreshToken> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<RefreshToken> tokens) {
+        this.tokens = tokens;
     }
 
     @Override

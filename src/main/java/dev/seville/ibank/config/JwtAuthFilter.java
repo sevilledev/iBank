@@ -48,9 +48,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 );
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                System.out.println("User authenticated successfully: " + userDetails.getUsername());
-            } else {
-                System.out.println("JWT is invalid or expired!");
             }
         }
 
